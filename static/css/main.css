@@ -243,5 +243,6 @@ img {
   main {
     width: 96%;
     max-width: unset;
+    margin: -8px auto;
   }
 }
