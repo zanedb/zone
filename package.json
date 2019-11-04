@@ -1,10 +1,10 @@
 {
   "name": "zone",
   "version": "1.0.0",
-  "description": "linus.zone",
+  "description": "zane.zone",
   "main": "src/main.js",
-  "repository": "git@github.com:thesephist/zone.git",
-  "author": "Linus Lee <hi@linus.zone>",
+  "repository": "git@github.com:zanedb/zone.git",
+  "author": "Zane Davis-Barrs <contact@zane.sh>",
   "license": "MIT",
   "scripts": {
     "start": "node src/main.js"
