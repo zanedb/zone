@@ -1,4 +1,4 @@
-# linus.zone
+# zane.zone
 
 A URL shortener / note sharing service, running at [zane.zone](https://zane.zone). Forked from [Linus Lee](https://github.com/thesephist)'s [linus.zone](https://github.com/thesephist/zone).
 
