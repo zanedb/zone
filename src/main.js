@@ -54,7 +54,7 @@ app.post('/new', async (req, res) => {
   if (req.body.id && req.body.id.includes('.')) {
     res.status(400)
     res.set('Content-Type', 'text/plain')
-    res.send(errorPage('Record IDs cannot contain "."'))
+    res.send(errorPage('Record IDs cannot contain “.”', res))
     return
   }
 
