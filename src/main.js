@@ -31,7 +31,8 @@ const tpl = params => {
   return templateResult
 }
 
-const errorPage = message => {
+const errorPage = (message, res) => {
+  res.set('Content-Type', 'text/html; charset=utf-8')
   return tpl({
     title: 'Error',
     content: `<div class="fullCenter"><h1>${message}</h1><h3><a href="/">Return home?</a></h3></div>`
@@ -82,11 +83,11 @@ app.post('/new', async (req, res) => {
 
       if (record.isURI() && record.id === record.content) {
         res.status(409)
-        res.send(errorPage(`This record will create a redirect loop.`))
+        res.send(errorPage(`This record will create a redirect loop.`, res))
         return
       } else if (!record.validate()) {
         res.status(400)
-        res.send(errorPage('This record is invalid.'))
+        res.send(errorPage('This record is invalid.', res))
         return
       }
 
@@ -97,7 +98,10 @@ app.post('/new', async (req, res) => {
       res.status(401)
       res.set('Content-Type', 'text/plain')
       res.send(
-        errorPage(`Incorrect password: could not edit record ${req.body.id}.`)
+        errorPage(
+          `Incorrect password: could not edit record ${req.body.id}.`,
+          res
+        )
       )
       console.log(`Unauthorized attempt to edit ${req.body.id}`)
     }
@@ -129,7 +133,7 @@ app.get('/:id', async (req, res) => {
       }
     } else {
       res.status(404)
-      res.send(errorPage(`Record ${rid} does not exist.`))
+      res.send(errorPage(`Record ${rid} does not exist.`, res))
     }
   } catch (e) {
     console.error(e)
@@ -152,7 +156,7 @@ app.get('/:id/raw', async (req, res) => {
       }
     } else {
       res.status(404)
-      res.send(errorPage(`Record ${rid} does not exist.`))
+      res.send(errorPage(`Record ${rid} does not exist.`, res))
     }
   } catch (e) {
     console.error(e)
@@ -169,7 +173,7 @@ app.get('/:id/edit', async (req, res) => {
       res.redirect(302, `/#${record.id}`) // prefilled form
     } else {
       res.status(404)
-      res.send(errorPage(`Record ${rid} does not exist.`))
+      res.send(errorPage(`Record ${rid} does not exist.`, res))
     }
   } catch (e) {
     console.error(e)
