@@ -50,6 +50,17 @@ app.get('/', (req, res) => {
   })
 })
 
+app.get('/new', (req, res) => {
+  fs.readFile('static/new.html', 'utf8', (err, data) => {
+    if (err) {
+      throw err
+    }
+
+    res.set('Content-Type', 'text/html')
+    res.send(data)
+  })
+})
+
 app.post('/new', async (req, res) => {
   if (req.body.id && req.body.id.includes('.')) {
     res.status(400)
